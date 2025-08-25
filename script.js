@@ -1,3 +1,5 @@
+'use strict';
+
 const todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 renderTodoList();
 //get todoList from localStorage and put in on the page
@@ -20,8 +22,9 @@ function addTodo() {
   const inputValue = inputElement.value;
   //get text from a textbox
 
-  todoList.push(inputValue);
+  todoList.push({taskName: inputValue, date: '', id: genereateID()});
   localStorage.setItem('todoList', JSON.stringify(todoList));
+  console.log(todoList);
   //save input value into todoList and localStorage 
 
   inputElement.value = '';  
@@ -34,17 +37,18 @@ function addTodo() {
 function renderTodoList() {
   let todoListHTML = '';
 
-  todoList.forEach(todo => {    
+  todoList.forEach(todoObject => {
     const htmlElement = `
-      <p class="js-task-name" id="${genereateID()}">
-        ${todo} 
+      <p id="${todoObject.id}">
+        ${todoObject.taskName}
+        ${todoObject.date}
         <button class="js-delete-button">Delete</button>
       </p>
-    `;
-  
+    `;  
+
     todoListHTML += htmlElement;
   })
-  //generate HTML for each todoList element
+  //generate HTML block for each todoList element
 
   document
     .querySelector('.js-todo-list')
@@ -56,21 +60,20 @@ function renderTodoList() {
   */
 
   const deleteButtons = document.querySelectorAll('.js-delete-button');
-  deleteButtons.forEach(button => button.addEventListener('click', deleteTask));
+  deleteButtons.forEach(button => button.addEventListener('click', (event) => deleteTask(event)));
   //find & add deleteEvent to all deleteButtons
 }
 
 
-function deleteTask() {
-  let taskName = this.parentElement.innerText;
-  taskName = taskName.slice(0, -7);
-  //get todo taskName from <p> element
+function deleteTask(event) {
+  let taskID = event.target.parentElement.id;
+  //get taskID from delete button's parent element 
 
-  const taskIndex = todoList.indexOf(taskName);
+  const taskIndex = todoList.findIndex(task => task.id === taskID);
   todoList.splice(taskIndex, 1);
-  //find taskIndex in todoList and remove task from there
+  //find taskIndex in todoList and remove task from array
 
-  this.parentElement.remove();
+  event.target.parentElement.remove();
   localStorage.setItem('todoList', JSON.stringify(todoList));
   //remove <p> element from the page & update localStorage
 }

@@ -7,11 +7,15 @@
   
   <body>
     <p>Todo List</p>
-    <input class="js-name-input" placeholder="Todo name">
-    <input type="date">
-    <button class="js-add-button">Add</button>
+    <div class="todo-input">
+      <input class="js-name-input" placeholder="Todo name">
+      <input class="js-date-input" type="date">
+      <div class="add-btn-wrapper">
+        <button class="js-add-button add-btn">Add</button>
+      </div>
+    </div>
 
-    <div class="js-todo-list"></div>
+    <div class="js-todo-list todo-list"></div>
 
     <script src="script.js"></script>
   </body>

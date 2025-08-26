@@ -10,21 +10,30 @@ document
 
 document
   .querySelector('.js-name-input')
-  .addEventListener('keydown', (event) => checkEventKey(event));
+  .addEventListener('keydown', (e) => checkEventKey(e));
 
 
-function checkEventKey(event) {
-  if (event.key === 'Enter') return addTodo();
+function checkEventKey(e) {
+  if (e.key === 'Enter') return addTodo();
 }
+
 
 function addTodo() {
   const inputElement = document.querySelector('.js-name-input');
-  const inputValue = inputElement.value;
-  //get text from a textbox
+  const taskName = inputElement.value;
+  //get text from the input textbox
 
-  todoList.push({taskName: inputValue, date: '', id: genereateID()});
+  const dateInputElement = document.querySelector('.js-date-input');
+  const dueDate = dateInputElement.value;
+  //get due date from the input date 
+
+  todoList.push({
+    taskName, 
+    dueDate, 
+    id: genereateID(),
+  });
+
   localStorage.setItem('todoList', JSON.stringify(todoList));
-  console.log(todoList);
   //save input value into todoList and localStorage 
 
   inputElement.value = '';  
@@ -38,12 +47,17 @@ function renderTodoList() {
   let todoListHTML = '';
 
   todoList.forEach(todoObject => {
+    const { taskName, dueDate, id } = todoObject;
+    //destructuring
+
     const htmlElement = `
-      <p id="${todoObject.id}">
-        ${todoObject.taskName}
-        ${todoObject.date}
-        <button class="js-delete-button">Delete</button>
-      </p>
+      <div class="todo-list-row">
+        <div>${taskName}</div>
+        <div>${dueDate}</div>
+        <div class="del-btn-wrapper">
+          <button class="js-delete-button del-btn">Delete</button>
+        </div>
+      </div>
     `;  
 
     todoListHTML += htmlElement;
@@ -60,23 +74,28 @@ function renderTodoList() {
   */
 
   const deleteButtons = document.querySelectorAll('.js-delete-button');
-  deleteButtons.forEach(button => button.addEventListener('click', (event) => deleteTask(event)));
+  deleteButtons.forEach(button => button.addEventListener('click', (e) => deleteTask(e)));
   //find & add deleteEvent to all deleteButtons
 }
 
 
-function deleteTask(event) {
-  let taskID = event.target.parentElement.id;
+function deleteTask(e) {
+  console.log(e.target.parentElement.parentElement);
+
+  /*
+  let taskID = e.target.parentElement.id;
   //get taskID from delete button's parent element 
 
   const taskIndex = todoList.findIndex(task => task.id === taskID);
   todoList.splice(taskIndex, 1);
   //find taskIndex in todoList and remove task from array
 
-  event.target.parentElement.remove();
+  e.target.parentElement.remove();
   localStorage.setItem('todoList', JSON.stringify(todoList));
   //remove <p> element from the page & update localStorage
+  */
 }
+ 
 
 function genereateID() {
   return Math.random().toString(16).slice(-5);

@@ -1,15 +1,62 @@
 body {
-  font-family: Arial;
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 600px;
+  background-color: rgb(49, 49, 49);
 }
 
-.todo-input {
+.body-wrapper {
+  padding: 0px 10px;
+}
+
+p {
+  font-family: Arial;
+  color: white;
+  margin: 0;
+}
+
+/* ----------------HEADER------------------- */
+
+.header {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 20px 0 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* -----------TODO-INPUT-ROW------------------- */
+
+.todo-list-input-row {
   display: grid;
-  grid-template-columns: 1fr 120px 80px;
+  grid-template-columns: 1fr 140px 80px;
+  align-items: center;
   margin: 0 0 10px 0;
   column-gap: 8px;
 }
+
+.date-input-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.name-input,
+.date-input {
+  padding: 6px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+}
+
+.name-input {
+  width: 95%;
+}
+
+.date-input {
+  width: 85%;
+}
+
+/* ------------TODO-LIST-ROWS----------------- */
 
 .todo-list {
   display: flex;
@@ -19,12 +66,52 @@ body {
 
 .todo-list-row {
   display: grid;
-  grid-template-columns: 1fr 120px 80px;
+  grid-template-columns: 1fr 140px 80px;
   column-gap: 8px;
   align-items: center;
 }
 
+.due-date-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* ------------------BUTTONS--------------------- */
+
 .add-btn,
 .del-btn {
+  border: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
   width: 100%;
+}
+
+.add-btn {
+  background-color: rgb(0, 133, 0);
+  transition: background-color 0.4s;
+}
+
+.add-btn:hover {
+  background-color: rgb(1, 172, 1);
+}
+
+.add-btn:active {
+  transition: background-color 0.1s;
+  background-color: rgb(10, 145, 0);
+}
+
+.del-btn {
+  background-color: rgb(255, 136, 0);
+  transition: background-color 0.4s;
+}
+
+.del-btn:hover {
+  background-color: rgb(236, 28, 0);
+}
+
+.del-btn:active {
+  transition: background-color 0.1s;
+  background-color: rgb(184, 21, 0);
 }

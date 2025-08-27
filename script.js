@@ -52,8 +52,8 @@ function renderTodoList() {
 
     const htmlElement = `
       <div class="todo-list-row">
-        <div>${taskName}</div>
-        <div>${dueDate}</div>
+        <div><p>${taskName}</p></div>
+        <div class="due-date-container"><p>${dueDate}</p></div>
         <div class="del-btn-wrapper">
           <button class="js-delete-button del-btn">Delete</button>
         </div>

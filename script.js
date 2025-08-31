@@ -34,7 +34,7 @@ function addTodo() {
   });
 
   localStorage.setItem('todoList', JSON.stringify(todoList));
-  //save input value into todoList and localStorage 
+  //save input value into todoList array and localStorage 
 
   inputElement.value = '';  
   //reset the text in the textbox
@@ -52,10 +52,10 @@ function renderTodoList() {
 
     const htmlElement = `
       <div class="todo-list-row">
-        <div><p>${taskName}</p></div>
+        <div class="task-name-container"><p>${taskName}</p></div>
         <div class="due-date-container"><p>${dueDate}</p></div>
-        <div class="del-btn-wrapper">
-          <button class="js-delete-button del-btn">Delete</button>
+        <div class="del-btn-wrapper"">
+          <button class="js-delete-button del-btn" id="${id}">Delete</button>
         </div>
       </div>
     `;  
@@ -69,8 +69,7 @@ function renderTodoList() {
     .innerHTML = todoListHTML;
 
   /*
-  rewriting <div>'s value, not adding to it.
-  that's why the todoList values aren't duplicated each time.
+  rewriting <div>'s value, not adding to it. that's why the todoList values aren't duplicated each time.
   */
 
   const deleteButtons = document.querySelectorAll('.js-delete-button');
@@ -80,20 +79,17 @@ function renderTodoList() {
 
 
 function deleteTask(e) {
-  console.log(e.target.parentElement.parentElement);
+  const delBtn = e.target;
+  const delBtnId = delBtn.id;
+  //get id assosiated with current task from delete button 
 
-  /*
-  let taskID = e.target.parentElement.id;
-  //get taskID from delete button's parent element 
-
-  const taskIndex = todoList.findIndex(task => task.id === taskID);
+  const taskIndex = todoList.findIndex(todoObject => todoObject.id === delBtnId);
   todoList.splice(taskIndex, 1);
-  //find taskIndex in todoList and remove task from array
+  //remove current task from array
 
-  e.target.parentElement.remove();
+  e.target.parentElement.parentElement.remove();
   localStorage.setItem('todoList', JSON.stringify(todoList));
-  //remove <p> element from the page & update localStorage
-  */
+  // remove current todo-list-row & update localStorage
 }
  
 

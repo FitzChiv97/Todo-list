@@ -12,6 +12,9 @@ document
   .querySelector('.js-name-input')
   .addEventListener('keydown', (e) => checkEventKey(e));
 
+document
+  .querySelector('.js-darkmode-toggle')
+  .addEventListener('click', (e) => switchDarkMode(e));
 
 function checkEventKey(e) {
   if (e.key === 'Enter') return addTodo();
@@ -95,4 +98,16 @@ function deleteTask(e) {
 
 function genereateID() {
   return Math.random().toString(16).slice(-5);
+}
+
+
+function switchDarkMode(e) {
+  const isChecked = e.target.checked;
+  const pageContent = document.querySelector('.js-body');
+
+  if (isChecked) {
+    pageContent.classList.add('darkmode');
+  } else {
+    pageContent.classList.remove('darkmode');
+  }
 }

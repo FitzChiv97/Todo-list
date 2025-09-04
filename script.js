@@ -13,7 +13,7 @@ document
   .addEventListener('keydown', (e) => checkEventKey(e));
 
 document
-  .querySelector('.js-darkmode-toggle')
+  .querySelector('.js-darkmode-btn')
   .addEventListener('click', (e) => switchDarkMode(e));
 
 function checkEventKey(e) {
@@ -102,12 +102,11 @@ function genereateID() {
 
 
 function switchDarkMode(e) {
-  const isChecked = e.target.checked;
   const pageContent = document.querySelector('.js-body');
 
-  if (isChecked) {
-    pageContent.classList.add('darkmode');
-  } else {
+  (!pageContent.classList.contains('darkmode'))?
+    pageContent.classList.add('darkmode'):
     pageContent.classList.remove('darkmode');
-  }
+  
+  // localStorage.setItem('darkmode', JSON.stringify())
 }

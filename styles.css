@@ -148,24 +148,42 @@ p {
 }
 
 .darkmode-btn {
-  height: 40px;
-  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   padding: 0px;
   border: none;
   border-radius: 50%;
+  
+  height: 40px;
+  width: 40px;
 
-  box-shadow: 0px 0px 10px rgba(122, 122, 122, 0.8);
-  background-color: rgb(175, 175, 175);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-shadow: var(--shadow);
+  background-color: rgb(221, 221, 221);
 }
 
-/* .darkmode-btn img {
-  height: 28px;
-  width: 28px;
-} */
+.darkmode-btn img {
+  display: none;
+}
 
+.darkmode-btn img.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .darkmode-btn-container {
+    top: 17px;
+    right: 17px;
+  }
+
+  .darkmode-btn {
+    height: 30px;
+    width: 30px;
+  }
+
+  .darkmode-btn img {
+    width: 18px;
+  }
+}
 

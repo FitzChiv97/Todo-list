@@ -20,6 +20,8 @@ function checkEventKey(e) {
   if (e.key === 'Enter') return addTodo();
 }
 
+if (localStorage.getItem('darkmode')) darkmodeCheck();
+
 
 function addTodo() {
   const inputElement = document.querySelector('.js-name-input');
@@ -104,9 +106,27 @@ function genereateID() {
 function switchDarkMode(e) {
   const pageContent = document.querySelector('.js-body');
 
-  (!pageContent.classList.contains('darkmode'))?
-    pageContent.classList.add('darkmode'):
+  if (pageContent.classList.contains('darkmode')) {
     pageContent.classList.remove('darkmode');
-  
-  // localStorage.setItem('darkmode', JSON.stringify())
+    localStorage.setItem('darkmode', 'off');
+
+    document.querySelector('.js-light-mode-img').classList.remove('active');
+    document.querySelector('.js-dark-mode-img').classList.add('active');
+    //changing dark-mode-btn svg to sun
+  } else {
+    pageContent.classList.add('darkmode');
+    localStorage.setItem('darkmode', 'on');
+
+    document.querySelector('.js-light-mode-img').classList.add('active');
+    document.querySelector('.js-dark-mode-img').classList.remove('active');
+    //changing dark-mode-btn svg to moon
+  };
+}
+
+function darkmodeCheck() {
+  if (localStorage.getItem('darkmode') === 'on') {
+    document.querySelector('.js-body').classList.add('darkmode');
+    document.querySelector('.js-light-mode-img').classList.add('active');
+    document.querySelector('.js-dark-mode-img').classList.remove('active');
+  }
 }

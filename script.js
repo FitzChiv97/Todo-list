@@ -20,31 +20,56 @@ function checkEventKey(e) {
   if (e.key === 'Enter') return addTodo();
 }
 
+document
+  .querySelector('.js-name-input')
+  .addEventListener('click', (e) => console.log(e.target));
+
 if (localStorage.getItem('darkmode')) darkmodeCheck();
 
 
 function addTodo() {
-  const inputElement = document.querySelector('.js-name-input');
-  const taskName = inputElement.value;
+  const nameInputElement = document.querySelector('.js-name-input');
+  const taskName = nameInputElement.value;
   //get text from the input textbox
 
   const dateInputElement = document.querySelector('.js-date-input');
   const dueDate = dateInputElement.value;
   //get due date from the input date 
 
-  todoList.push({
-    taskName, 
-    dueDate, 
-    id: genereateID(),
-  });
-
-  localStorage.setItem('todoList', JSON.stringify(todoList));
-  //save input value into todoList array and localStorage 
-
-  inputElement.value = '';  
-  //reset the text in the textbox
-
-  renderTodoList();
+  if (!taskName) {
+    const todoAlertMessage = `
+      <div class="alert-message">
+        <p>Fill in the task below</p>
+      </div>
+    `;
+    
+    document.querySelector('.js-todo-alert').innerHTML = todoAlertMessage;
+    //check if todo inpit is filled
+  } else if (!dueDate) {
+    const dateAlertMessage = `
+      <div class="alert-message">
+        <p>Fill in the date below</p>
+      </div>
+    `;
+    
+    document.querySelector('.js-date-alert').innerHTML = dateAlertMessage;
+    //check if date inpit is filled
+  } else {
+    todoList.push({
+      taskName, 
+      dueDate, 
+      id: genereateID(),
+    });
+  
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+    //save input value into todoList array and localStorage 
+  
+    nameInputElement.value = '';
+    dateInputElement.value = '';
+    //reset the text and date inputs
+  
+    renderTodoList();
+  }
 }
 
 
@@ -90,9 +115,11 @@ function deleteTask(e) {
 
   const taskIndex = todoList.findIndex(todoObject => todoObject.id === delBtnId);
   todoList.splice(taskIndex, 1);
-  //remove current task from array
+  //remove current task from array by id
 
-  e.target.parentElement.parentElement.remove();
+  e.target.parentElement.parentElement.classList.add('crossed-out');
+  setTimeout(() => e.target.parentElement.parentElement.remove(), 1000);
+
   localStorage.setItem('todoList', JSON.stringify(todoList));
   // remove current todo-list-row & update localStorage
 }
@@ -122,6 +149,7 @@ function switchDarkMode(e) {
     //changing dark-mode-btn svg to moon
   };
 }
+
 
 function darkmodeCheck() {
   if (localStorage.getItem('darkmode') === 'on') {

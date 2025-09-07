@@ -6,6 +6,7 @@
 :root {
   --main-bg-color: white;
   --text-color: black;
+  --alert-text-color: rgb(104, 104, 104);
   --input-bg-color: rgb(221, 221, 221);
   --shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
@@ -13,6 +14,7 @@
 .darkmode {
   --main-bg-color: rgb(49, 49, 49);
   --text-color: white;
+  --alert-text-color: rgb(104, 104, 104);
   --input-bg-color: rgb(211, 211, 211);
   --shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
 }
@@ -59,6 +61,11 @@ p {
   justify-content: center;
 }
 
+.date-input-wrapper,
+.name-input-wrapper {
+  position: relative;
+}
+
 .name-input,
 .date-input {
   padding: 6px;
@@ -69,12 +76,54 @@ p {
   font-family: 'Montserrat', Arial;
 }
 
+.name-input:focus,
+.date-input:focus {
+  outline: 2px solid rgb(0, 133, 0);
+}
+
 .name-input {
   width: 95%;
 }
 
 .date-input {
   width: 85%;
+}
+
+/* ------------INPUT-ALERT-MESSAGE----------------- */
+
+.alert-message {
+  position: absolute;
+  bottom: 40px;
+  left: 5px;
+  
+  padding: 5px 12px 5px 5px;
+  border: 1px solid rgb(214, 25, 0);
+  border-radius: 8px;
+
+  background-color: var(--input-bg-color);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.alert-message p {
+  position: relative;
+  padding-left: 20px;
+  color: var(--alert-text-color);
+}
+
+.alert-message p::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -3px;
+  transform: translate(0, -50%);
+
+  width: 24px;
+  height: 24px;
+
+  background: url(/assets/icons/exclamation_mark.svg) no-repeat;
+  background-size: contain;
 }
 
 /* ------------TODO-LIST-ROWS----------------- */
@@ -95,6 +144,11 @@ p {
 .due-date-container {
   display: flex;
   justify-content: center;
+}
+
+.crossed-out p {
+  color:rgb(184, 21, 0);
+  text-decoration: line-through;
 }
 
 /* ------------------ADD-DELETE-BUTTONS--------------------- */
@@ -161,6 +215,7 @@ p {
 
   box-shadow: var(--shadow);
   background-color: rgb(221, 221, 221);
+  cursor: pointer;
 }
 
 .darkmode-btn img {

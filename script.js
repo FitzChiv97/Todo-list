@@ -9,22 +9,27 @@ document
   .addEventListener('click', addTodo);
 
 document
+  .querySelector('.js-darkmode-btn')
+  .addEventListener('click', (e) => switchDarkMode(e));
+
+document
   .querySelector('.js-name-input')
   .addEventListener('keydown', (e) => checkEventKey(e));
 
 document
-  .querySelector('.js-darkmode-btn')
-  .addEventListener('click', (e) => switchDarkMode(e));
+  .querySelector('.js-name-input')
+  .addEventListener('click', (e) => removeAlertMessage(e));
+
+document
+  .querySelector('.js-date-input')
+  .addEventListener('click', (e) => removeAlertMessage(e));
+
+if (localStorage.getItem('darkmode')) darkmodeCheck();
+
 
 function checkEventKey(e) {
   if (e.key === 'Enter') return addTodo();
 }
-
-document
-  .querySelector('.js-name-input')
-  .addEventListener('click', (e) => console.log(e.target));
-
-if (localStorage.getItem('darkmode')) darkmodeCheck();
 
 
 function addTodo() {
@@ -37,22 +42,10 @@ function addTodo() {
   //get due date from the input date 
 
   if (!taskName) {
-    const todoAlertMessage = `
-      <div class="alert-message">
-        <p>Fill in the task below</p>
-      </div>
-    `;
-    
-    document.querySelector('.js-todo-alert').innerHTML = todoAlertMessage;
+    document.querySelector('.js-todo-alert').classList.add('active');
     //check if todo inpit is filled
   } else if (!dueDate) {
-    const dateAlertMessage = `
-      <div class="alert-message">
-        <p>Fill in the date below</p>
-      </div>
-    `;
-    
-    document.querySelector('.js-date-alert').innerHTML = dateAlertMessage;
+    document.querySelector('.js-date-alert').classList.add('active');
     //check if date inpit is filled
   } else {
     todoList.push({
@@ -156,5 +149,12 @@ function darkmodeCheck() {
     document.querySelector('.js-body').classList.add('darkmode');
     document.querySelector('.js-light-mode-img').classList.add('active');
     document.querySelector('.js-dark-mode-img').classList.remove('active');
+  }
+}
+
+function removeAlertMessage(e) {
+  const neighbourElement = e.target.nextElementSibling;
+  if (neighbourElement.classList.contains('active')) {
+    neighbourElement.classList.remove('active');
   }
 }

@@ -95,6 +95,7 @@ p {
   position: absolute;
   bottom: 40px;
   left: 5px;
+  display: none;
   
   padding: 5px 12px 5px 5px;
   border: 1px solid rgb(214, 25, 0);
@@ -104,6 +105,10 @@ p {
   box-shadow: var(--shadow);
   white-space: nowrap;
   font-size: 13px;
+}
+
+.active {
+  display: block;
 }
 
 .alert-message p {

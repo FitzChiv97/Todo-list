@@ -18,11 +18,11 @@ document
 
 document
   .querySelector('.js-name-input')
-  .addEventListener('click', (e) => removeAlertMessage(e));
+  .addEventListener('click', () => document.querySelector('.js-todo-pop-up-wrapper').innerHTML = '');
 
 document
   .querySelector('.js-date-input')
-  .addEventListener('click', (e) => removeAlertMessage(e));
+  .addEventListener('click', () => document.querySelector('.js-date-pop-up-wrapper').innerHTML = '');
 
 if (localStorage.getItem('darkmode')) darkmodeCheck();
 
@@ -42,10 +42,20 @@ function addTodo() {
   //get due date from the input date 
 
   if (!taskName) {
-    document.querySelector('.js-todo-alert').classList.add('active');
+    const todoAlertMessage = `
+      <div class="js-todo-alert pop-up-message">
+        <p>Fill in the task below</p>
+      </div>
+    `;
+    document.querySelector('.js-todo-pop-up-wrapper').innerHTML = todoAlertMessage;
     //check if todo inpit is filled
   } else if (!dueDate) {
-    document.querySelector('.js-date-alert').classList.add('active');
+    const dateAlertMessage = `
+      <div class="js-date-alert pop-up-message">
+        <p>Fill in the date below</p>
+      </div>
+    `;
+    document.querySelector('.js-date-pop-up-wrapper').innerHTML = dateAlertMessage;
     //check if date inpit is filled
   } else {
     todoList.push({
@@ -75,6 +85,7 @@ function renderTodoList() {
 
     const htmlElement = `
       <div class="todo-list-row">
+        <div class="priority-container"></div>
         <div class="task-name-container"><p>${taskName}</p></div>
         <div class="due-date-container"><p>${dueDate}</p></div>
         <div class="del-btn-wrapper"">
@@ -152,9 +163,6 @@ function darkmodeCheck() {
   }
 }
 
-function removeAlertMessage(e) {
-  const neighbourElement = e.target.nextElementSibling;
-  if (neighbourElement.classList.contains('active')) {
-    neighbourElement.classList.remove('active');
-  }
+function removePopUpMessage(e) {
+  e.target.nextElementSibling.remove();
 }

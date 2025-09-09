@@ -22,19 +22,24 @@
       </div>
       
       <div class="todo-list-input-row">
+
+        <div class="priority-select-wrapper">
+            <select id="priority-select" required>
+              <option value="" disabled selected hidden>Priority</option>
+              <option value="high-priority">High</option>
+              <option value="medium-priority">Medium</option>
+              <option value="low-priority">Low</option>
+            </select>
+        </div>
   
         <div class="name-input-wrapper">
           <input class="js-name-input name-input" placeholder="Todo name">
-          <div class="js-todo-alert alert-message">
-            <p>Fill in the task below</p>
-          </div>
+          <div class="js-todo-pop-up-wrapper"></div>
         </div>
   
         <div class="date-input-wrapper">
           <input class="js-date-input date-input" type="date">
-          <div class="js-date-alert alert-message">
-            <p>Fill in the date below</p>
-          </div>
+          <div class="js-date-pop-up-wrapper"></div>
         </div>
   
         <div class="add-btn-wrapper">

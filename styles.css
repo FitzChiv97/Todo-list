@@ -21,7 +21,7 @@
 
 body {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 700px;
   background-color: var(--main-bg-color);
   height: 1000px;
   font-family: 'Montserrat', Arial;
@@ -50,7 +50,7 @@ p {
 
 .todo-list-input-row {
   display: grid;
-  grid-template-columns: 1fr 140px 80px;
+  grid-template-columns: 100px 1fr 140px 80px;
   align-items: center;
   margin: 0 0 10px 0;
   column-gap: 8px;
@@ -89,13 +89,12 @@ p {
   width: 85%;
 }
 
-/* ------------INPUT-ALERT-MESSAGE----------------- */
+/* ------------INPUT-POP-UP-MESSAGE----------------- */
 
-.alert-message {
+.pop-up-message {
   position: absolute;
   bottom: 40px;
   left: 5px;
-  display: none;
   
   padding: 5px 12px 5px 5px;
   border: 1px solid rgb(214, 25, 0);
@@ -107,17 +106,13 @@ p {
   font-size: 13px;
 }
 
-.active {
-  display: block;
-}
-
-.alert-message p {
+.pop-up-message p {
   position: relative;
   padding-left: 20px;
   color: var(--alert-text-color);
 }
 
-.alert-message p::before {
+.pop-up-message p::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -131,6 +126,16 @@ p {
   background-size: contain;
 }
 
+/* -----------PRIORITY-CHOOSE-SECTION------------------- */
+
+#priority-select:invalid {
+  background-color: pink;
+}
+
+#priority-select:valid {
+  background-color: lightblue;
+}
+
 /* ------------TODO-LIST-ROWS----------------- */
 
 .todo-list {
@@ -141,7 +146,7 @@ p {
 
 .todo-list-row {
   display: grid;
-  grid-template-columns: 1fr 140px 80px;
+  grid-template-columns: 100px 1fr 140px 80px;
   column-gap: 8px;
   align-items: center;
 }

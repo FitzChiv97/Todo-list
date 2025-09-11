@@ -43,7 +43,7 @@ function addTodo() {
 
   const taskInput = document.getElementById('priority-select');
   const taskPriority = taskInput.value;
-  //get priority from its input (optional)
+  //get priority from its input
 
   if (!taskName) {
     const todoAlertMessage = `
@@ -74,7 +74,7 @@ function addTodo() {
   
     nameInputElement.value = '';
     dateInputElement.value = '';
-    taskInput.value = '';
+    taskInput.value = 'no-priority';
     //reset the text, date, priority inputs
   
     renderTodoList();
@@ -86,12 +86,12 @@ function renderTodoList() {
   let todoListHTML = '';
 
   todoList.forEach(todoObject => {
-    const { taskName, dueDate, id } = todoObject;
+    const { taskName, dueDate, taskPriority, id } = todoObject;
     //destructuring
 
     const htmlElement = `
       <div class="todo-list-row">
-        <div class="task-name-container"><p>${taskName}</p></div>
+        <div class="task-name-container"><p class="${taskPriority}">${taskName}</p></div>
         <div class="due-date-container"><p>${dueDate}</p></div>
         <div class="del-btn-wrapper"">
           <button class="js-delete-button del-btn" id="${id}">Delete</button>

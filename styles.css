@@ -141,17 +141,17 @@ p {
   outline: 2px solid rgb(0, 133, 0);
 }
 
-.high-priority {
+.select-high-priority {
   color: rgb(214, 25, 0);
   font-weight: 700;
 }
 
-.medium-priority {
+.select-medium-priority {
   color: rgb(255, 136, 0);
   font-weight: 700;
 }
 
-.low-priority {
+.select-low-priority {
   color: rgb(0, 133, 0);
   font-weight: 700;
 }
@@ -174,6 +174,46 @@ p {
 .due-date-container {
   display: flex;
   justify-content: center;
+}
+
+.task-name-container p {
+  position: relative;
+  padding-left: 30px;
+
+  /* overflow-wrap: anywhere; */
+  word-break: break-word;
+}
+
+.high-priority::before,
+.medium-priority::before,
+.low-priority::before,
+.no-priority::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+
+  width: 24px;
+  height: 24px;
+
+  background-size: contain;
+}
+
+.high-priority::before {
+  background: url(/assets/icons/priority/high_priority.svg);
+}
+
+.medium-priority::before {
+  background: url(/assets/icons/priority/medium_priority.svg);
+}
+
+.low-priority::before {
+  background: url(/assets/icons/priority/low_priority.svg);
+}
+
+.no-priority::before {
+  background: url(/assets/icons/priority/no_priority.svg);
 }
 
 .crossed-out p {

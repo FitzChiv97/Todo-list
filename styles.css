@@ -242,6 +242,7 @@ p {
 
 .add-btn:hover {
   background-color: rgb(1, 172, 1);
+  transition: background-color 0.3s;
 }
 
 .add-btn:active {
@@ -256,6 +257,7 @@ p {
 
 .del-btn:hover {
   background-color: rgb(236, 28, 0);
+  transition: background-color 0.3s;
 }
 
 .del-btn:active {
@@ -312,3 +314,90 @@ p {
   }
 }
 
+/* ------------------SORT-BY-DROPDOWN--------------------- */
+
+.sort-btn-container {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+.sort-btn {
+  position: relative;
+  z-index: 1;
+
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+
+  box-shadow: var(--shadow);
+  background-color: var(--input-bg-color);
+  font-size: 14px;
+}
+
+.sort-btn p {
+  color: gray;
+}
+
+.sort-dropdown {
+  display: none;
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+  padding: 0;
+  width: 70px;
+  list-style-type: none;
+}
+
+.sort-btn:hover {
+  outline: 2px solid rgb(0, 133, 0);
+}
+
+.sort-btn:hover .sort-dropdown {
+  display: block;
+  cursor: pointer;
+}
+
+.sort-dropdown li:hover {
+  background-color: gray;
+  color: white;
+  padding: 0px 8px;
+}
+
+.sort-option {
+  position: relative;
+}
+
+.option-dropdown {
+  display: none;
+  position: absolute;
+
+  padding: 8px 10px;
+  border: 2px solid rgb(0, 133, 0);;
+  border-radius: 5px;
+
+  box-shadow: var(--shadow);
+  background-color: var(--input-bg-color);
+}
+
+.option-dropdown ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.sort-option:hover .option-dropdown {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .sort-container {
+    top: 17px;
+    left: 17px;
+  }
+
+  .sort-btn {
+    font-size: 13px;
+  }
+}

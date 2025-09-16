@@ -24,6 +24,10 @@ document
   .querySelector('.js-date-input')
   .addEventListener('click', () => document.querySelector('.js-date-pop-up-wrapper').innerHTML = '');
 
+document
+  .querySelector('.js-sort-btn')
+  .addEventListener('click', (e) => sortTodo(e));
+
 if (localStorage.getItem('darkmode')) darkmodeCheck();
 
 
@@ -74,9 +78,10 @@ function addTodo() {
   
     nameInputElement.value = '';
     dateInputElement.value = '';
-    taskInput.value = 'no-priority';
+    taskInput.value = '0';
     //reset the text, date, priority inputs
   
+    console.log(todoList);
     renderTodoList();
   }
 }
@@ -89,9 +94,15 @@ function renderTodoList() {
     const { taskName, dueDate, taskPriority, id } = todoObject;
     //destructuring
 
+    const priorityClass = (taskPriority > 2)? 'high-priority':
+    (taskPriority > 1)? 'medium-priority':
+    (taskPriority > 0)? 'low-priority':
+    'no-priority';
+    //create class for task priority based on its value (0-3)
+
     const htmlElement = `
       <div class="todo-list-row">
-        <div class="task-name-container"><p class="${taskPriority}">${taskName}</p></div>
+        <div class="task-name-container"><p class="${priorityClass}">${taskName}</p></div>
         <div class="due-date-container"><p>${dueDate}</p></div>
         <div class="del-btn-wrapper"">
           <button class="js-delete-button del-btn" id="${id}">Delete</button>
@@ -168,6 +179,27 @@ function darkmodeCheck() {
   }
 }
 
+
 function removePopUpMessage(e) {
   e.target.nextElementSibling.remove();
+}
+
+
+function sortTodo(e) {
+  const sortId = e.target.id;
+  //get id from sort list
+
+  let sortedTodolist = [];
+  
+  if (sortId === '1')  {
+    sortedTodolist = todoList.sort((a, b) => a.taskName.localeCompare(b.taskName));
+  } else if (sortId === '2') {
+    sortedTodolist = todoList.sort((a, b) => b.taskName.localeCompare(a.taskName));
+  } else if (sortId === '3') {
+    sortedTodolist = todoList.sort((a, b) => a.taskPriority - b.taskPriority);
+  } else if (sortId === '4') {
+    sortedTodolist = todoList.sort((a, b) => a.dueDate.localeCompare(a.dueDate));
+  }
+
+  console.log(sortedTodolist);
 }

@@ -10,6 +10,33 @@
   <body class="js-body">
     <div class="container">
 
+      <div class="sort-btn-container">
+        <div class="sort-btn js-sort-btn">
+          <p>Sort by</p>
+          <ul class="sort-dropdown">
+            <li>Priority</li>
+
+            <li class="sort-option">Name
+              <div class="option-dropdown">
+                <ul>
+                  <li>A-Z</li>
+                  <li>Z-A</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="sort-option">Date
+              <div class="option-dropdown">
+                <ul>
+                  <li id="">Due date</li>
+                  <li id="">Create date</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div class="darkmode-btn-container">
         <button class="darkmode-btn js-darkmode-btn">
           <img class="active js-dark-mode-img" src="assets/icons/dark_mode_dark_grey_filled.svg" alt="darkmode">
@@ -29,10 +56,10 @@
 
           <div class="priority-select-wrapper">
             <select id="priority-select">
-              <option value="no-priority" disabled selected hidden>Priority</option>
-              <option value="high-priority" class="select-high-priority">High</option>
-              <option value="medium-priority" class="select-medium-priority">Medium</option>
-              <option value="low-priority" class="select-low-priority">Low</option>
+              <option value="0" disabled selected hidden>Priority</option>
+              <option value="3" class="select-high-priority">High</option>
+              <option value="2" class="select-medium-priority">Medium</option>
+              <option value="1" class="select-low-priority">Low</option>
             </select>
           </div>
         </div>

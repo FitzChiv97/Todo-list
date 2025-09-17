@@ -1,6 +1,6 @@
 'use strict';
 
-const todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 renderTodoList();
 //get todoList from localStorage and put in on the page
 
@@ -186,20 +186,20 @@ function removePopUpMessage(e) {
 
 
 function sortTodo(e) {
-  const sortId = e.target.id;
-  //get id from sort list
+  const elementId = e.target.id;
 
-  let sortedTodolist = [];
+  console.log(e.target);
+  console.log(elementId);
+  // get id from sort list
   
-  if (sortId === '1')  {
-    sortedTodolist = todoList.sort((a, b) => a.taskName.localeCompare(b.taskName));
-  } else if (sortId === '2') {
-    sortedTodolist = todoList.sort((a, b) => b.taskName.localeCompare(a.taskName));
-  } else if (sortId === '3') {
-    sortedTodolist = todoList.sort((a, b) => a.taskPriority - b.taskPriority);
-  } else if (sortId === '4') {
-    sortedTodolist = todoList.sort((a, b) => a.dueDate.localeCompare(a.dueDate));
+  if (elementId === '1')  {
+    todoList = todoList.sort((a,b) => a.taskPriority - b.taskPriority);
+  } else if (elementId === '2') {
+    todoList = todoList.sort((a,b) => a.taskName.localeCompare(b.taskName));
+  } else if (elementId === '3') {
+    todoList = todoList.sort((a,b) => b.taskName.localeCompare(a.taskName));
   }
 
-  console.log(sortedTodolist);
+  console.log(todoList);
+  renderTodoList();
 }

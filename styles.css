@@ -314,7 +314,7 @@ p {
   }
 }
 
-/* ------------------SORT-BY-DROPDOWN--------------------- */
+/* ------------------SORT-DROPDOWN--------------------- */
 
 .sort-btn-container {
   position: absolute;
@@ -335,7 +335,7 @@ p {
   font-size: 14px;
 }
 
-.sort-btn p {
+.sort-btn-name {
   color: gray;
 }
 
@@ -365,29 +365,43 @@ p {
   padding: 0px 8px;
 }
 
-.sort-option {
+.sort-item-wrapper p {
+  color: black;
+}
+
+.sort-item-wrapper p:hover {
+  color: white;
+}
+
+.sort-item-wrapper {
   position: relative;
 }
 
 .option-dropdown {
   display: none;
   position: absolute;
+  z-index: 2;
 
+  top: -15px;
+  left: 50px;
   padding: 8px 10px;
-  border: 2px solid rgb(0, 133, 0);;
-  border-radius: 5px;
 
-  box-shadow: var(--shadow);
   background-color: var(--input-bg-color);
-}
-
-.option-dropdown ul {
-  margin: 0;
-  padding: 0;
+  border: 2px solid rgb(0, 133, 0);
+  border-radius: 5px;
+  color: black;
   list-style-type: none;
 }
 
-.sort-option:hover .option-dropdown {
+.option-dropdown__name {
+  width: 45px;
+}
+
+.option-dropdown__date {
+  width: 100px;
+}
+
+.sort-item-wrapper:hover .option-dropdown {
   display: block;
 }
 

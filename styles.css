@@ -393,6 +393,10 @@ p {
   list-style-type: none;
 }
 
+.option-dropdown__priority {
+  width: 90px;
+}
+
 .option-dropdown__name {
   width: 45px;
 }

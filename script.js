@@ -49,6 +49,9 @@ function addTodo() {
   const taskPriority = taskInput.value;
   //get priority from its input
 
+  const createDate = Date.now();
+  //get create date when adding task to the list
+
   if (!taskName) {
     const todoAlertMessage = `
       <div class="js-todo-alert pop-up-message">
@@ -69,7 +72,8 @@ function addTodo() {
     todoList.push({
       taskName, 
       taskPriority,
-      dueDate, 
+      dueDate,
+      createDate, 
       id: genereateID(),
     });
   
@@ -187,19 +191,30 @@ function removePopUpMessage(e) {
 
 function sortTodo(e) {
   const elementId = e.target.id;
-
   console.log(e.target);
   console.log(elementId);
-  // get id from sort list
+  // get id from sort menu
   
   if (elementId === '1')  {
-    todoList = todoList.sort((a,b) => a.taskPriority - b.taskPriority);
+    todoList = todoList.sort((a,b) => b.taskPriority - a.taskPriority);
   } else if (elementId === '2') {
-    todoList = todoList.sort((a,b) => a.taskName.localeCompare(b.taskName));
+    todoList = todoList.sort((a,b) => a.taskPriority - b.taskPriority);
   } else if (elementId === '3') {
+    todoList = todoList.sort((a,b) => a.taskName.localeCompare(b.taskName));
+  } else if (elementId === '4') {
     todoList = todoList.sort((a,b) => b.taskName.localeCompare(a.taskName));
+  } else if (elementId === '5') {
+    todoList = todoList.sort((a,b) => convertDate(a.dueDate) - convertDate(b.dueDate));
+  } else if (elementId === '6') {
+    todoList = todoList.sort((a,b) => a.createDate - b.createDate);
   }
 
-  console.log(todoList);
   renderTodoList();
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+  console.log(todoList);
+}
+
+
+function convertDate(dueDate) {
+  return new Date(dueDate);
 }
